@@ -68,12 +68,8 @@ export default function CoffeeCanvas() {
                 const vRatio = canvas.height / image.height;
 
                 // Optimized scaling for responsive luxury feel
-                // On mobile portrait, we avoid pure 'object-cover' which crops too much horizontal detail
-                // Instead, we use a hybrid ratio that favors width visibility for background decorations
+                // Ensure we always cover the entire canvas without leaving gaps
                 let ratio = Math.max(hRatio, vRatio);
-                if (canvas.height > canvas.width) {
-                    ratio = Math.max(hRatio, vRatio * 0.72); // Zooms out slightly on mobile to show decorative text
-                }
 
                 const centerShift_x = (canvas.width - image.width * ratio) / 2;
                 const centerShift_y = (canvas.height - image.height * ratio) / 2;
@@ -120,7 +116,7 @@ export default function CoffeeCanvas() {
     }, []);
 
     return (
-        <div className="background-animation-container bg-obsidian pointer-events-none">
+        <div className="background-animation-container h-[100dvh] bg-obsidian pointer-events-none">
             <canvas
                 ref={canvasRef}
                 className="w-full h-full object-cover opacity-100 transition-opacity duration-1000"
