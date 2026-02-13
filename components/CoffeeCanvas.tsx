@@ -68,8 +68,8 @@ export default function CoffeeCanvas() {
                 const vRatio = canvas.height / image.height;
 
                 // Optimized scaling for responsive luxury feel
-                // Ensure we always cover the entire canvas without leaving gaps
-                let ratio = Math.max(hRatio, vRatio);
+                // Add a 1.05x 'overscan' to ensure no black bars appear due to viewport rounding
+                let ratio = Math.max(hRatio, vRatio) * 1.05;
 
                 const centerShift_x = (canvas.width - image.width * ratio) / 2;
                 const centerShift_y = (canvas.height - image.height * ratio) / 2;
@@ -116,7 +116,7 @@ export default function CoffeeCanvas() {
     }, []);
 
     return (
-        <div className="background-animation-container h-[100dvh] bg-obsidian pointer-events-none">
+        <div className="background-animation-container h-[100dvh] fixed inset-0 bg-obsidian pointer-events-none">
             <canvas
                 ref={canvasRef}
                 className="w-full h-full object-cover opacity-100 transition-opacity duration-1000"

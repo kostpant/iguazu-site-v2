@@ -144,7 +144,7 @@ export default function ContentOverlay() {
             </motion.header>
 
             {/* Hero Section - Centered */}
-            <section className="min-h-[100dvh] sticky top-0 flex flex-col items-center justify-center text-center px-4 xs:px-8 z-10 pt-20 md:pt-32">
+            <section className="h-[100dvh] md:min-h-[100dvh] sticky top-0 flex flex-col items-center justify-center text-center px-4 xs:px-8 z-10 pt-20 md:pt-32">
                 <motion.div
                     style={{ opacity: heroOpacity, y: heroTranslateY }}
                     transition={{ ease: "easeOut" }}
