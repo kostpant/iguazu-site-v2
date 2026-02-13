@@ -116,12 +116,13 @@ export default function CoffeeCanvas() {
         <div className="fixed inset-0 z-0 bg-obsidian pointer-events-none">
             <canvas
                 ref={canvasRef}
-                className="w-full h-full object-cover opacity-60 mix-blend-screen transition-opacity duration-1000"
+                className="w-full h-full object-cover opacity-80 mix-blend-screen transition-opacity duration-1000"
             />
 
             {/* Cinematic Gradients for Quiet Luxury */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0A0A0A_95%)]" />
-            <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-transparent to-charcoal/60" />
+            {/* Cinematic Gradients - Removed to prevent visibility issues */}
+            {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_60%)]" /> */}
+            {/* <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" /> */}
 
             {/* Texture */}
             <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay" />
@@ -130,7 +131,7 @@ export default function CoffeeCanvas() {
             <Particles />
 
             {!isLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center font-serif italic text-gold/30 tracking-[0.4em] uppercase text-[10px]">
+                <div className="absolute inset-0 flex items-center justify-center font-serif italic text-rose/30 tracking-[0.4em] uppercase text-[10px]">
                     Cultivating the Ritual...
                 </div>
             )}
@@ -147,14 +148,14 @@ function Particles() {
 
     if (!mounted) return null;
 
-    const particles = Array.from({ length: 15 });
+    const particles = Array.from({ length: 20 });
 
     return (
         <div className="absolute inset-0 overflow-hidden">
             {particles.map((_, i) => (
                 <motion.div
                     key={i}
-                    className="absolute rounded-full bg-gold/20 blur-[2px]"
+                    className="absolute rounded-full bg-passion/30 blur-[2px]"
                     initial={{
                         x: Math.random() * window.innerWidth,
                         y: Math.random() * window.innerHeight,
@@ -162,7 +163,7 @@ function Particles() {
                     }}
                     animate={{
                         y: [null, Math.random() * -150],
-                        opacity: [0, 0.4, 0],
+                        opacity: [0, 0.6, 0],
                         scale: [0, Math.random() * 2 + 1, 0]
                     }}
                     transition={{
@@ -172,8 +173,8 @@ function Particles() {
                         ease: "easeInOut"
                     }}
                     style={{
-                        width: Math.random() * 2 + 1 + 'px',
-                        height: Math.random() * 2 + 1 + 'px',
+                        width: Math.random() * 3 + 1 + 'px',
+                        height: Math.random() * 3 + 1 + 'px',
                     }}
                 />
             ))}

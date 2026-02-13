@@ -5,6 +5,10 @@
   --color-champagne: #F7E7CE;
   --color-gold: #D4AF37;
   --color-charcoal: #1A1A1A;
+  --color-passion: #E63946;
+  /* Deep Red for Valentine's */
+  --color-rose: #FFD1DC;
+  /* Soft Pink for Valentine's */
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
 }
@@ -60,4 +64,9 @@ body {
   background: rgba(26, 26, 26, 0.4);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(247, 231, 206, 0.1);
+}
+
+/* Forcefull overrides for location section visibility */
+.location-section * {
+  opacity: 1 !important;
 }

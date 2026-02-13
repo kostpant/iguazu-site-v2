@@ -16,8 +16,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Iguazu Loutraki | The Art of Coffee",
-  description: "Experience the pinnacle of coffee roasting. A legacy of taste, refined for the modern connoisseur.",
+  title: "Iguazu Λουτράκι | Η Τέχνη του Καφέ",
+  description: "Ζήστε την κορυφαία εμπειρία καφέ. Μια κληρονομιά γεύσης, εκλεπτυσμένη για τον σύγχρονο γνώστη.",
 };
 
 export default function RootLayout({
