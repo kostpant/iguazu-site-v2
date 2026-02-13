@@ -107,7 +107,7 @@ export default function ContentOverlay() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, ease: LUXURY_EASE }}
-                className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-between px-8 md:px-16 py-8 md:py-12"
+                className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-between px-8 md:px-16 py-8 md:py-12 bg-zinc-950 transition-colors duration-500"
             >
                 <div className="flex flex-col">
                     <span className="text-xl md:text-2xl font-serif font-bold text-passion tracking-[0.3em] uppercase drop-shadow-md">
@@ -155,12 +155,9 @@ export default function ContentOverlay() {
             </section>
 
             {/* Content Container */}
-            <motion.div
-                style={{ opacity: contentBgOpacity }}
-                className="relative z-20 w-full"
-            >
+            <div className="foreground-content w-full">
                 {/* Visual Menu Sections */}
-                <div className="bg-transparent pt-32 pb-10">
+                <div className="pt-32 pb-10">
                     <div className="max-w-[1600px] mx-auto px-8 md:px-16">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                             {CATEGORIES.map((category, idx) => (
@@ -252,7 +249,7 @@ export default function ContentOverlay() {
                     {/* Location & Hours Section */}
                     <LocationSection />
                 </div>
-            </motion.div>
+            </div>
 
             {/* Navigation Bar */}
             <ActionBar />
@@ -275,14 +272,13 @@ function LocationSection() {
         <section
             id="location"
             className="location-section mt-40 max-w-7xl mx-auto px-8 md:px-16 pb-48 relative z-30"
-            style={{ opacity: 1 }}
         >
             {/* Background Container - White Theme - Solid */}
             <div className="absolute inset-x-0 -top-20 -bottom-20 bg-white rounded-[3rem] border border-passion/10 -z-10 shadow-[0_0_100px_rgba(230,57,70,0.1)] !opacity-100" />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
                 {/* Text Content - White box */}
-                <div className="p-10 bg-white border border-zinc-200 rounded-3xl shadow-xl !opacity-100 relative z-20">
+                <div className="content-section-solid-white p-10 bg-white border border-zinc-200 rounded-3xl shadow-xl relative z-20">
                     <span className="text-rose text-sm font-bold tracking-[0.8em] uppercase mb-6 block text-center lg:text-left !opacity-100">Βρείτε μας</span>
                     <h2 className="text-5xl md:text-7xl font-serif text-zinc-900 mb-12 italic text-center lg:text-left drop-shadow-none !opacity-100">Iguazu Λουτράκι</h2>
 
@@ -324,16 +320,16 @@ function LocationSection() {
                 </div>
 
                 {/* Map Container - Ensuring 100% opacity */}
-                <div className="relative aspect-square md:aspect-video lg:aspect-square w-full brightness-100 transition-all duration-1000 overflow-hidden rounded-[2rem] border-2 border-zinc-200 shadow-2xl z-20 !opacity-100 bg-zinc-100">
+                <div className="content-section-solid-white relative aspect-square md:aspect-video lg:aspect-square w-full brightness-100 transition-all duration-1000 overflow-hidden rounded-[2rem] border-2 border-zinc-200 shadow-2xl z-20 bg-zinc-100">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3148.665798934563!2d22.973410776785863!3d37.97321590111166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a046c8273752e5%3A0xac7ef1c070f4cf4f!2sIguazu%20Loutraki!5e0!3m2!1sen!2sgr!4v1707838000000!5m2!1sen!2sgr"
                         width="100%"
                         height="100%"
-                        style={{ border: 0, opacity: 1 }}
+                        style={{ border: 0 }}
                         allowFullScreen
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
-                        className="!opacity-100 grayscale-0"
+                        className="grayscale-0"
                     />
                 </div>
             </div>
@@ -348,7 +344,7 @@ function CategoryCard({ category, delay }: { category: any, delay: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: LUXURY_DURATION, ease: LUXURY_EASE, delay }}
-            className="p-10 bg-zinc-950 border border-zinc-800 hover:border-passion/40 transition-all duration-700 group flex flex-col h-full overflow-hidden relative rounded-2xl shadow-2xl"
+            className="content-section-solid p-10 bg-zinc-950 border border-zinc-800 hover:border-passion/40 transition-all duration-700 group flex flex-col h-full overflow-hidden relative rounded-2xl shadow-2xl"
         >
             <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-1000">
                 <category.icon className="w-20 h-20 text-passion" />
@@ -387,7 +383,7 @@ function FeatureBox({ title, desc, icon, delay }: { title: string, desc: string,
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay }}
-            className="p-12 border border-zinc-800 bg-zinc-950 hover:border-passion/30 transition-all duration-700 flex flex-col items-center text-center group rounded-2xl shadow-2xl"
+            className="content-section-solid p-12 border border-zinc-800 bg-zinc-950 hover:border-passion/30 transition-all duration-700 flex flex-col items-center text-center group rounded-2xl shadow-2xl"
         >
             <div className="w-16 h-16 flex items-center justify-center rounded-full bg-passion/5 border border-passion/10 mb-8 group-hover:scale-110 group-hover:bg-passion/10 transition-all duration-700 text-passion">
                 {icon}
@@ -434,7 +430,7 @@ function ReviewsMarquee() {
             {doubledReviews.map((review, i) => (
                 <div
                     key={i}
-                    className="flex-shrink-0 w-[450px] p-12 bg-zinc-950 border border-zinc-800 flex flex-col justify-between group hover:border-passion/30 transition-all duration-700 rounded-2xl shadow-2xl"
+                    className="content-section-solid flex-shrink-0 w-[450px] p-12 bg-zinc-950 border border-zinc-800 flex flex-col justify-between group hover:border-passion/30 transition-all duration-700 rounded-2xl shadow-2xl"
                 >
                     <div className="mb-8">
                         <div className="flex gap-1 mb-6">
@@ -461,7 +457,7 @@ function ActionBar() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1 }}
         >
-            <div className="bg-zinc-900 p-2 rounded-full border border-zinc-700 flex gap-2 pointer-events-auto shadow-2xl">
+            <div className="bg-zinc-950 p-2 rounded-full border border-zinc-800 flex gap-2 pointer-events-auto shadow-2xl">
                 <a href="tel:+302744021012" className="h-12 flex items-center px-10 border border-passion/30 text-rose font-bold text-[10px] tracking-[0.4em] uppercase hover:bg-passion hover:text-white transition-all duration-700 rounded-full">
                     Καλέστε μας
                 </a>

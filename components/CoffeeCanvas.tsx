@@ -113,10 +113,10 @@ export default function CoffeeCanvas() {
     }, []);
 
     return (
-        <div className="fixed inset-0 z-0 bg-obsidian pointer-events-none">
+        <div className="background-animation-container bg-obsidian pointer-events-none">
             <canvas
                 ref={canvasRef}
-                className="w-full h-full object-cover opacity-80 mix-blend-screen transition-opacity duration-1000"
+                className="w-full h-full object-cover opacity-100 transition-opacity duration-1000"
             />
 
             {/* Cinematic Gradients for Quiet Luxury */}
