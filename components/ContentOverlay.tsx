@@ -93,12 +93,16 @@ const REVIEWS = [
 export default function ContentOverlay() {
     const { scrollYProgress } = useScroll();
 
+    // Buttery smooth scroll transitions
+    const springConfig = { stiffness: 80, damping: 25, mass: 1 };
+    const smoothProgress = useSpring(scrollYProgress, springConfig);
+
     // Smooth opacity for hero
-    const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-    const heroTranslateY = useTransform(scrollYProgress, [0, 0.15], [0, -50]);
+    const heroOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
+    const heroTranslateY = useTransform(smoothProgress, [0, 0.15], [0, -50]);
 
     // Background visibility toggle
-    const contentBgOpacity = useTransform(scrollYProgress, [0.1, 0.25], [0, 1]);
+    const contentBgOpacity = useTransform(smoothProgress, [0.1, 0.25], [0, 1]);
 
     return (
         <div className="relative z-10 w-full min-h-[300vh]">
@@ -110,10 +114,10 @@ export default function ContentOverlay() {
                 className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-between px-3 md:px-8 lg:px-16 py-3.5 md:py-6 bg-zinc-950 transition-colors duration-500"
             >
                 <div className="flex flex-col">
-                    <span className="text-[14px] xs:text-base md:text-xl lg:text-2xl font-serif font-bold text-passion tracking-[0.1em] xs:tracking-[0.2em] md:tracking-[0.3em] uppercase drop-shadow-md whitespace-nowrap">
+                    <span className="text-[14px] xs:text-base md:text-xl lg:text-2xl font-serif font-bold text-passion tracking-[0.05em] xs:tracking-[0.2em] md:tracking-[0.3em] uppercase drop-shadow-md whitespace-nowrap">
                         Iguazu Loutraki
                     </span>
-                    <span className="text-[7px] xs:text-[8px] md:text-[10px] lg:text-xs text-rose tracking-[0.2em] xs:tracking-[0.3em] md:tracking-[0.4em] uppercase font-light mt-0.5 md:mt-1 whitespace-nowrap">
+                    <span className="text-[7px] xs:text-[8px] md:text-[10px] lg:text-xs text-rose tracking-[0.1em] xs:tracking-[0.3em] md:tracking-[0.4em] uppercase font-light mt-0.5 md:mt-1 whitespace-nowrap">
                         Valentine's Edition
                     </span>
                 </div>
@@ -140,17 +144,17 @@ export default function ContentOverlay() {
             </motion.header>
 
             {/* Hero Section - Centered */}
-            <section className="h-screen sticky top-0 flex flex-col items-center justify-center text-center px-4 xs:px-8 z-10">
+            <section className="h-screen sticky top-0 flex flex-col items-center justify-center text-center px-4 xs:px-8 z-10 pt-20 md:pt-32">
                 <motion.div
                     style={{ opacity: heroOpacity, y: heroTranslateY }}
                     transition={{ ease: "easeOut" }}
-                    className="pointer-events-none"
+                    className="pointer-events-none py-4"
                 >
-                    <h1 className="text-5xl xs:text-6xl md:text-[9.5rem] font-serif text-rose leading-[0.85] tracking-tighter mb-8 md:mb-10 drop-shadow-[0_0_15px_rgba(230,57,70,0.5)]">
+                    <h1 className="text-5xl xs:text-6xl md:text-7xl lg:text-8xl xl:text-[9.5rem] font-serif text-rose leading-[1.1] tracking-tighter mb-8 md:mb-10 drop-shadow-[0_0_15px_rgba(230,57,70,0.5)]">
                         <span className="block drop-shadow-2xl">Αγάπη &</span>
                         <span className="block italic text-passion mt-2 drop-shadow-2xl">Καφές</span>
                     </h1>
-                    <p className="text-gold font-serif italic text-base xs:text-lg md:text-2xl tracking-[0.4em] xs:tracking-[0.6em] uppercase drop-shadow-lg mb-8">
+                    <p className="text-gold font-serif italic text-base xs:text-lg md:text-2xl tracking-[0.2em] xs:tracking-[0.6em] uppercase drop-shadow-lg mb-8">
                         Γιορτάστε τον Άγιο Βαλεντίνο στο Iguazu
                     </p>
                 </motion.div>
