@@ -21,7 +21,7 @@ export default function CoffeeCanvas() {
         restDelta: 0.0001
     });
 
-    const currentFrame = useTransform(smoothProgress, [0, 1], [0, FRAME_COUNT - 1]);
+    const currentFrame = useTransform(smoothProgress, [0, 0.4], [0, FRAME_COUNT - 1], { clamp: true });
 
     useEffect(() => {
         const loadImages = async () => {
@@ -74,9 +74,9 @@ export default function CoffeeCanvas() {
                 const frameProgress = frameIndex / (FRAME_COUNT - 1);
                 const scaleEffect = 1 + (frameProgress * 0.08); // Subtle 8% growth as sequence progresses
 
-                let ratio = Math.max(hRatio, vRatio) * 1.05 * scaleEffect;
+                let ratio = Math.max(hRatio, vRatio) * 1.08 * scaleEffect;
                 if (canvas.height > canvas.width) {
-                    ratio = Math.max(hRatio, vRatio) * 1.05 * 1.4 * scaleEffect;
+                    ratio = Math.max(hRatio, vRatio) * 1.08 * 1.4 * scaleEffect;
                 }
 
                 const centerShift_x = (canvas.width - image.width * ratio) / 2;

@@ -97,12 +97,12 @@ export default function ContentOverlay() {
     const springConfig = { stiffness: 80, damping: 25, mass: 1 };
     const smoothProgress = useSpring(scrollYProgress, springConfig);
 
-    // Smooth opacity for hero
-    const heroOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
-    const heroTranslateY = useTransform(smoothProgress, [0, 0.15], [0, -50]);
+    // Smooth opacity for hero - Extended to allow sequence to play out
+    const heroOpacity = useTransform(smoothProgress, [0, 0.35], [1, 0]);
+    const heroTranslateY = useTransform(smoothProgress, [0, 0.35], [0, -60]);
 
-    // Background visibility toggle
-    const contentBgOpacity = useTransform(smoothProgress, [0.1, 0.25], [0, 1]);
+    // Background visibility toggle - Delayed to give background animation more airtime
+    const contentBgOpacity = useTransform(smoothProgress, [0.35, 0.5], [0, 1]);
 
     return (
         <div className="relative z-10 w-full min-h-[300vh]">
@@ -154,7 +154,7 @@ export default function ContentOverlay() {
                     transition={{ ease: "easeOut" }}
                     className="pointer-events-none py-4"
                 >
-                    <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[9.5rem] font-serif text-rose leading-[1.1] tracking-tighter mb-6 md:mb-10 drop-shadow-[0_0_15px_rgba(230,57,70,0.5)]">
+                    <h1 className="text-3xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[9.5rem] font-serif text-rose leading-[1.05] tracking-tighter mb-4 md:mb-10 drop-shadow-[0_0_15px_rgba(230,57,70,0.5)]">
                         <motion.span
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -176,14 +176,14 @@ export default function ContentOverlay() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1.5, delay: 0.8 }}
-                        className="text-gold font-serif italic text-sm xs:text-base md:text-2xl tracking-[0.2em] xs:tracking-[0.4em] md:tracking-[0.6em] uppercase drop-shadow-lg mb-8"
+                        className="text-gold font-serif italic text-[10px] xs:text-base md:text-2xl tracking-[0.2em] xs:tracking-[0.4em] md:tracking-[0.6em] uppercase drop-shadow-lg mb-6 xs:mb-8"
                     >
                         Γιορτάστε τον Άγιο Βαλεντίνο στο Iguazu
                     </motion.p>
                 </motion.div>
 
-                {/* Hero CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 xs:gap-4 md:gap-6 justify-center items-center pointer-events-auto w-full max-w-[280px] sm:max-w-none px-4 xs:px-0 mt-4">
+                {/* Hero CTA Buttons - Scaled for better fit */}
+                <div className="flex flex-col sm:flex-row gap-2.5 xs:gap-4 md:gap-6 justify-center items-center pointer-events-auto w-full max-w-[240px] xs:max-w-sm sm:max-w-none px-4 xs:px-0 mt-2 xs:mt-4">
                     <motion.a
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
