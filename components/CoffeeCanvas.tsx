@@ -69,10 +69,14 @@ export default function CoffeeCanvas() {
 
                 // Optimized scaling for responsive luxury feel
                 // Add a 1.05x 'overscan' to ensure no black bars appear due to viewport rounding
-                // On mobile portrait, zoom in significantly (1.6x) to focus only on the cup
-                let ratio = Math.max(hRatio, vRatio) * 1.05;
+                // On mobile portrait, zoom in (1.4x) to focus on the cup
+                // Added a cinematic scale effect driven by currentFrame progress
+                const frameProgress = frameIndex / (FRAME_COUNT - 1);
+                const scaleEffect = 1 + (frameProgress * 0.08); // Subtle 8% growth as sequence progresses
+
+                let ratio = Math.max(hRatio, vRatio) * 1.05 * scaleEffect;
                 if (canvas.height > canvas.width) {
-                    ratio = ratio * 1.6;
+                    ratio = Math.max(hRatio, vRatio) * 1.05 * 1.4 * scaleEffect;
                 }
 
                 const centerShift_x = (canvas.width - image.width * ratio) / 2;
@@ -155,7 +159,7 @@ function Particles() {
 
     if (!mounted) return null;
 
-    const particles = Array.from({ length: 20 });
+    const particles = Array.from({ length: mounted && window.innerWidth < 768 ? 12 : 25 });
 
     return (
         <div className="absolute inset-0 overflow-hidden">

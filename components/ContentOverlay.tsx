@@ -144,29 +144,52 @@ export default function ContentOverlay() {
             </motion.header>
 
             {/* Hero Section - Centered */}
-            <section className="min-h-[100dvh] sticky top-0 flex flex-col items-center justify-center text-center px-4 xs:px-8 z-10 pt-20 md:pt-32">
+            <section className="min-h-[100dvh] sticky top-0 flex flex-col items-center justify-center text-center px-4 xs:px-8 z-10 pt-14 md:pt-32">
                 <motion.div
-                    style={{ opacity: heroOpacity, y: heroTranslateY }}
+                    style={{
+                        opacity: heroOpacity,
+                        y: heroTranslateY,
+                        scale: useTransform(heroOpacity, [0, 1], [0.98, 1]) // Subtle parallax scale
+                    }}
                     transition={{ ease: "easeOut" }}
                     className="pointer-events-none py-4"
                 >
-                    <h1 className="text-5xl xs:text-6xl md:text-7xl lg:text-8xl xl:text-[9.5rem] font-serif text-rose leading-[1.1] tracking-tighter mb-8 md:mb-10 drop-shadow-[0_0_15px_rgba(230,57,70,0.5)]">
-                        <span className="block drop-shadow-2xl">Αγάπη &</span>
-                        <span className="block italic text-passion mt-2 drop-shadow-2xl">Καφές</span>
+                    <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[9.5rem] font-serif text-rose leading-[1.1] tracking-tighter mb-6 md:mb-10 drop-shadow-[0_0_15px_rgba(230,57,70,0.5)]">
+                        <motion.span
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1.2, ease: LUXURY_EASE, delay: 0.2 }}
+                            className="block drop-shadow-2xl"
+                        >
+                            Αγάπη &
+                        </motion.span>
+                        <motion.span
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1.5, ease: LUXURY_EASE, delay: 0.4 }}
+                            className="block italic text-passion mt-2 drop-shadow-2xl"
+                        >
+                            Καφές
+                        </motion.span>
                     </h1>
-                    <p className="text-gold font-serif italic text-base xs:text-lg md:text-2xl tracking-[0.2em] xs:tracking-[0.6em] uppercase drop-shadow-lg mb-8">
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1.5, delay: 0.8 }}
+                        className="text-gold font-serif italic text-sm xs:text-base md:text-2xl tracking-[0.2em] xs:tracking-[0.4em] md:tracking-[0.6em] uppercase drop-shadow-lg mb-8"
+                    >
                         Γιορτάστε τον Άγιο Βαλεντίνο στο Iguazu
-                    </p>
+                    </motion.p>
                 </motion.div>
 
                 {/* Hero CTA Buttons */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.5, ease: LUXURY_EASE, delay: 0.8 }}
-                    className="flex flex-col sm:flex-row gap-3 xs:gap-4 md:gap-6 justify-center items-center pointer-events-auto w-full max-w-[280px] sm:max-w-none px-4 xs:px-0"
-                >
-                    <a
+                <div className="flex flex-col sm:flex-row gap-3 xs:gap-4 md:gap-6 justify-center items-center pointer-events-auto w-full max-w-[280px] sm:max-w-none px-4 xs:px-0 mt-4">
+                    <motion.a
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.2, ease: LUXURY_EASE, delay: 1.0 }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         href="https://www.e-food.gr/delivery/korinthos/iguazu-coffee-shop-8104866"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -177,26 +200,44 @@ export default function ContentOverlay() {
                             <ShoppingBag className="w-3.5 h-3.5 md:w-5 md:h-5" />
                             <span>Παραγγελία</span>
                         </div>
-                    </a>
-                    <Link
-                        href="/menu"
-                        className="group relative px-6 xs:px-8 md:px-12 py-3.5 xs:py-4 md:py-4.5 overflow-hidden rounded-full bg-gold text-charcoal shadow-[0_0_30px_rgba(255,215,0,0.3)] hover:shadow-[0_0_50px_rgba(255,215,0,0.5)] transition-all duration-500 w-full sm:w-auto text-center"
+                    </motion.a>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.2, ease: LUXURY_EASE, delay: 1.2 }}
+                        className="w-full sm:w-auto"
                     >
-                        <div className="relative flex items-center justify-center gap-2 xs:gap-3 font-bold text-[10px] xs:text-xs md:text-sm tracking-[0.1em] xs:tracking-[0.2em] uppercase whitespace-nowrap">
-                            <Coffee className="w-3.5 h-3.5 md:w-5 md:h-5" />
-                            <span>Ο Κατάλογος μας</span>
-                        </div>
-                    </Link>
-                    <a
+                        <Link
+                            href="/menu"
+                            className="group relative px-6 xs:px-8 md:px-12 py-3.5 xs:py-4 md:py-4.5 overflow-hidden rounded-full bg-gold text-charcoal shadow-[0_0_30px_rgba(255,215,0,0.3)] hover:shadow-[0_0_50px_rgba(255,215,0,0.5)] transition-all duration-500 block w-full text-center"
+                        >
+                            <motion.div
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="relative flex items-center justify-center gap-2 xs:gap-3 font-bold text-[10px] xs:text-xs md:text-sm tracking-[0.1em] xs:tracking-[0.2em] uppercase whitespace-nowrap"
+                            >
+                                <Coffee className="w-3.5 h-3.5 md:w-5 md:h-5" />
+                                <span>Ο Κατάλογος μας</span>
+                            </motion.div>
+                        </Link>
+                    </motion.div>
+
+                    <motion.a
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.2, ease: LUXURY_EASE, delay: 1.4 }}
+                        whileHover={{ scale: 1.02, backgroundColor: 'rgba(230,57,70,1)', color: '#fff' }}
+                        whileTap={{ scale: 0.98 }}
                         href="/gallery"
-                        className="group relative px-6 xs:px-8 md:px-12 py-3.5 xs:py-4 md:py-4.5 overflow-hidden rounded-full border-2 border-rose text-rose hover:bg-rose hover:text-white transition-all duration-500 w-full sm:w-auto text-center"
+                        className="group relative px-6 xs:px-8 md:px-12 py-3.5 xs:py-4 md:py-4.5 overflow-hidden rounded-full border-2 border-rose text-rose transition-all duration-500 w-full sm:w-auto text-center"
                     >
                         <div className="relative flex items-center justify-center gap-2 xs:gap-3 font-bold text-[10px] xs:text-xs md:text-sm tracking-[0.1em] xs:tracking-[0.2em] uppercase whitespace-nowrap">
                             <Camera className="w-3.5 h-3.5 md:w-5 md:h-5" />
                             <span>Gallery</span>
                         </div>
-                    </a>
-                </motion.div>
+                    </motion.a>
+                </div>
             </section>
 
             {/* Content Container */}
