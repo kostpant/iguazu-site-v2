@@ -1,244 +1,155 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { X, Phone, Search, Coffee, Wine, Pizza, CakeSlice } from 'lucide-react';
 import Link from 'next/link';
-import { clsx } from 'clsx';
+import { ArrowLeft, Star, Coffee, Wine, Pizza, Heart, ShoppingBag, CakeSlice } from 'lucide-react';
 
-// --- Menu Data ---
-type MenuItem = {
-    name: string;
-    price: string;
-    description?: string;
-};
+// Animation Constants
+const LUXURY_EASE = [0.19, 1, 0.22, 1] as const;
+const LUXURY_DURATION = 1.2;
 
-type MenuCategory = {
-    id: string;
-    title: string;
-    icon?: any;
-    items: MenuItem[];
-};
-
-const menuData: MenuCategory[] = [
+const CATEGORIES = [
     {
-        id: 'cocktails',
-        title: 'Cocktails',
-        icon: Wine,
+        id: 'popular',
+        title: 'Δημοφιλή',
+        icon: Star,
         items: [
-            { name: "Mojito", price: "7,00 €", description: "Rum, lime, mint & soda" },
-            { name: "Porn Star", price: "7,00 €", description: "Vanilla, passion fruit, lime & vodka" },
-            { name: "Mai Tai", price: "7,00 €", description: "Rum, lime, orgeat & orange" },
-            { name: "Daquiri Strawberry", price: "7,00 €", description: "Rum, lime & strawberry" },
+            { name: "Freddo Espresso", price: "2,40 €" },
+            { name: "Cappuccino", price: "2,50 €" },
+            { name: "Freddo Cappuccino", price: "2,50 €" },
+            { name: "Φλογέρα Philadelphia", price: "2,50 €" }
         ]
     },
     {
         id: 'coffees',
-        title: 'Καφέδες & Ροφήματα',
+        title: 'Καφές',
         icon: Coffee,
         items: [
-            { name: "Espresso", price: "2,00 €", description: "Ο σταρ των καφέδων!" },
-            { name: "Freddo Espresso", price: "2,40 €", description: "Δροσερός και αναζωογονητικός." },
-            { name: "Cappuccino", price: "2,50 €", description: "Απόλυτη ισορροπία σε καφέ και γάλα." },
-            { name: "Freddo Cappuccino", price: "2,50 €", description: "Παγωμένος espresso με κρύο αφρόγαλα." },
-            { name: "Nes", price: "2,40 €", description: "Στιγμιαίος καφές που σε ζεσταίνει." },
-            { name: "Φίλτρου", price: "2,50 €", description: "Για απόλαυση χωρίς φίλτρο!" },
+            { name: "Espresso", price: "2,00 €" },
+            { name: "Freddo Espresso", price: "2,40 €" },
+            { name: "Cappuccino", price: "2,50 €" },
+            { name: "Freddo Cappuccino", price: "2,50 €" },
             { name: "Flat White", price: "2,70 €" },
-            { name: "Cappuccino Latte", price: "2,70 €" },
-            { name: "Cappuccino Vegan", price: "2,70 €", description: "Με γάλα αμυγδάλου." },
-            { name: "Frappe", price: "2,40 €", description: "Ελληνικής καταγωγής, παγκόσμιας αναγνώρισης!" },
-            { name: "Mochaccino", price: "4,00 €", description: "Καφές και σοκολάτα γίνονται ένα." },
-            { name: "Ελληνικός", price: "2,00 €" }, // Added generic as it's standard, though not in list explicitly, "Nes" was there.
-            { name: "Τσάι", price: "2,00 €", description: "Relax και αναζωογόνηση." },
-            { name: "Χαμομήλι", price: "2,00 €" },
-            { name: "Σπιτική Λεμονάδα", price: "3,50 €" },
-            { name: "Σπιτική Λεμονάδα Με Φράουλα", price: "3,50 €" },
-            { name: "Φυσικός Χυμός Πορτοκάλι", price: "3,00 €" },
+            { name: "Nes", price: "2,40 €" },
+            { name: "Frappe", price: "2,40 €" },
+            { name: "Filter Coffee", price: "2,50 €" }
         ]
     },
     {
         id: 'chocolates',
         title: 'Σοκολάτες',
-        icon: Coffee, // Reuse icon or find better
+        icon: Heart,
         items: [
             { name: "Σοκολάτα", price: "2,70 €" },
-            { name: "Σοκολάτα Viennois", price: "2,50 €" },
-            { name: "Σοκολάτα Φυστικοβούτυρο", price: "3,00 €", description: "Με αλατισμένη καραμέλα." },
-            { name: "Σοκολάτα Lila", price: "2,80 €", description: "Με Φράουλα & Βανίλια." },
-            { name: "Σοκολάτα Γάλακτος Καραμέλα & Αλάτι", price: "2,80 €" },
-            { name: "Σοκολάτα Cappuccino Nocciola", price: "2,80 €" },
-            { name: "Σοκολάτα Oreo", price: "3,00 €" },
-            { name: "Σοκολάτα Μπισκότο", price: "2,80 €" },
             { name: "Σοκολάτα Bueno", price: "3,00 €" },
+            { name: "Σοκολάτα Lila & Strawberry", price: "2,80 €" },
+            { name: "Mochaccino", price: "4,00 €" }
         ]
     },
     {
         id: 'snacks',
-        title: 'Snacks & Πίτες',
+        title: 'Σνακ',
         icon: Pizza,
         items: [
-            { name: "Τυρόπιτα", price: "1,80 €" },
-            { name: "Τυρόπιτα Κουρού", price: "1,80 €" },
             { name: "Φλογέρα Philadelphia", price: "2,50 €" },
-            { name: "Μπιφτεκόπιτα", price: "2,50 €" },
-            { name: "Ζαμπονοτυρόπιτα", price: "2,50 €" },
-            { name: "Πίτσα", price: "3,00 €" },
-            { name: "Πεϊνιρλί", price: "2,90 €", description: "Με mix τυριών & αλλαντικών." },
-            { name: "Λουκανικόπιτα", price: "2,20 €" },
-            { name: "Μπουγάτσα Με Κρέμα", price: "2,50 €" },
-            { name: "Κουλούρι Θεσ/κης Γαλοπούλα/Phila", price: "2,00 €" },
-            { name: "Κουλούρι Θεσσαλονίκης", price: "0,70 €" },
+            { name: "Τοστ Γαλοπούλα", price: "2,50 €" }
         ]
     },
     {
-        id: 'sandwiches',
-        title: 'Sandwiches',
-        icon: Pizza, // Need a sandwich icon ideally, Pizza works as "Food"
-        items: [
-            { name: "Μπαγκέτα Λευκή Κοτομπουκιές", price: "3,50 €" },
-            { name: "Τορτίγια Caesar's", price: "3,50 €" },
-            { name: "Αραβική Πίτα Κοτόπουλο", price: "2,90 €" },
-            { name: "Sandwich Σολομός", price: "4,00 €" },
-            { name: "Sandwich Κοτόπουλο & Μπέικον", price: "4,00 €" },
-            { name: "Μπαγκέτα Λευκή Κοτόπουλο", price: "3,50 €" },
-            { name: "Sandwich Προσούτο", price: "4,00 €" },
-            { name: "4 Mam Μπαγκέτα Κοτόπουλο", price: "2,90 €" },
-            { name: "Αραβική Πίτα Γαλοπούλα", price: "2,90 €" },
-            { name: "Μπαγκέτα Λευκή Γαλοπούλα", price: "3,20 €" },
-            { name: "Τοστ Γαλοπούλα", price: "2,50 €" },
-        ]
-    },
-    {
-        id: 'sweets',
-        title: 'Γλυκά & Donuts',
-        icon: CakeSlice,
-        items: [
-            { name: "Donut Oreo", price: "2,30 €" },
-            { name: "Donut Κανέλας", price: "2,30 €" },
-            { name: "Donut Σοκολάτα", price: "2,30 €" },
-            { name: "Donut Bueno", price: "2,30 €" },
-            { name: "Donut Ferrero", price: "2,30 €" },
-            { name: "Donut Σοκολάτα & Μπισκότο", price: "2,30 €" },
-            { name: "Soft Cookie Σοκολάτα", price: "2,20 €" },
-            { name: "Soft Cookie Βανίλια & Σοκολάτα", price: "2,00 €" },
-            { name: "Cinnamon Roll", price: "2,80 €" },
-            { name: "Κρουασάν Βουτύρου (Praline/Oreo)", price: "3,00 €" },
-            { name: "Κρουασάν Μαργαρίτα Bueno", price: "3,00 €" },
-            { name: "Κρουασάν Cheesecake Φράουλα", price: "3,00 €" },
-            { name: "Κρουασάν Φυστίκι", price: "3,00 €" },
-        ]
-    },
-    {
-        id: 'drinks',
-        title: 'Αναψυκτικά & Μπύρες',
+        id: 'cocktails',
+        title: 'Κοκτέιλ',
         icon: Wine,
         items: [
-            { name: "Coca-Cola / Zero", price: "2,00 €" },
-            { name: "Fanta / Sprite", price: "2,00 €" },
-            { name: "Nestea (Lemon/Peach/Green)", price: "2,70 €" },
-            { name: "Perrier", price: "2,00 €" },
-            { name: "Hell Energy", price: "2,00 €" },
-            { name: "Νερό 500ml", price: "0,50 €" },
-            { name: "Amstel / Radler", price: "2,00 € / 2,50 €" },
-            { name: "Heineken / Alfa", price: "2,00 €" },
-            { name: "Kaiser / Fischer / Fix Dark", price: "2,50 €" },
-            { name: "Corona", price: "4,00 €" },
+            { name: "Mojito", price: "7,00 €", desc: "Ρούμι, λάιμ, μέντα & σόδα" },
+            { name: "Porn Star", price: "7,00 €", desc: "Βανίλια, φρούτα του πάθους, λάιμ & βότκα" },
+            { name: "Mai Tai", price: "7,00 €", desc: "Ρούμι, λάιμ, πικραμύγδαλο & πορτοκάλι" },
+            { name: "Daiquiri Strawberry", price: "7,00 €", desc: "Ρούμι, λάιμ & φράουλα" }
+        ]
+    },
+    {
+        id: 'refreshments',
+        title: 'Αναψυκτικά',
+        icon: Wine,
+        items: [
+            { name: "Coca-Cola", price: "2,00 €" },
+            { name: "Fanta", price: "2,00 €" },
+            { name: "Sprite", price: "2,00 €" },
+            { name: "Σπιτική Λεμονάδα", price: "3,50 €" }
         ]
     }
 ];
 
 export default function MenuPage() {
     return (
-        <div className="min-h-screen bg-obsidian text-white font-sans selection:bg-passion/30 relative overflow-x-hidden">
-            {/* Backgrounds */}
-            <div className="fixed inset-0 bg-obsidian z-0" />
-            <div className="fixed inset-0 bg-noise opacity-[0.03] pointer-events-none z-0" />
-            <div className="fixed inset-0 bg-[radial-gradient(circle_at_top_left,rgba(211,47,47,0.08)_0%,transparent_50%)] pointer-events-none z-0" />
-            <div className="fixed inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(212,175,55,0.05)_0%,transparent_50%)] pointer-events-none z-0" />
-
+        <main className="min-h-screen bg-zinc-950 text-white font-sans overflow-x-hidden">
             {/* Header */}
-            <header className="sticky top-0 left-0 right-0 p-6 md:p-8 z-50 flex items-start justify-between bg-obsidian/80 backdrop-blur-md border-b border-white/5">
-                <div className="flex flex-col">
-                    <span className="text-xl md:text-2xl font-serif font-bold text-white tracking-widest uppercase shadow-black drop-shadow-lg">
-                        Iguazu Loutraki
-                    </span>
-                    <span className="text-xs md:text-sm text-gold tracking-[0.2em] font-light uppercase opacity-80">
-                        Menu & Tastes
-                    </span>
+            <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-16 py-6 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
+                <Link href="/" className="group flex items-center gap-2 text-rose hover:text-passion transition-colors duration-300">
+                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                    <span className="font-serif uppercase tracking-widest text-sm font-bold">Επιστροφή</span>
+                </Link>
+                <div className="text-center">
+                    <h1 className="text-xl md:text-2xl font-serif font-bold text-passion tracking-widest uppercase mb-1">Ο ΚΑΤΑΛΟΓΟΣ ΜΑΣ</h1>
+                    <div className="w-12 h-0.5 bg-gold mx-auto rounded-full" />
                 </div>
-
-                <div className="flex items-center gap-4">
-                    <a
-                        href="tel:+302744021012"
-                        className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-passion hover:bg-gold text-white font-bold text-sm transition-all duration-300 shadow-lg shadow-passion/20 group"
-                    >
-                        <Phone className="w-4 h-4 fill-current" />
-                        <span>DELIVERY</span>
-                    </a>
-                    <Link href="/" className="p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-colors backdrop-blur-md group">
-                        <X className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-                    </Link>
-                </div>
+                <div className="w-24 hidden md:block" /> {/* Spacer */}
             </header>
 
-            {/* Content using Grid masonry-ish layout */}
-            <main className="relative z-10 max-w-7xl mx-auto px-6 pt-10 pb-20">
-                <motion.h1
+            <div className="pt-32 pb-24 px-4 md:px-8 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {CATEGORIES.map((category, idx) => (
+                        <motion.div
+                            key={category.id}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: LUXURY_DURATION, ease: LUXURY_EASE, delay: idx * 0.1 }}
+                            className="bg-zinc-900/50 border border-zinc-800 p-6 md:p-8 rounded-2xl hover:border-passion/40 transition-all duration-500 group"
+                        >
+                            <div className="flex items-center gap-3 mb-8 pb-4 border-b border-zinc-800">
+                                <div className="p-2 bg-passion/10 rounded-lg">
+                                    <category.icon className="w-5 h-5 text-passion" />
+                                </div>
+                                <h3 className="font-serif text-lg text-rose uppercase tracking-widest font-bold">{category.title}</h3>
+                            </div>
+
+                            <ul className="space-y-4">
+                                {category.items.map((item, i) => (
+                                    <li key={i} className="flex flex-col border-b border-zinc-800/50 pb-3 last:border-0 last:pb-0 group/item">
+                                        <div className="flex justify-between items-baseline gap-4 mb-1">
+                                            <span className="text-white font-serif text-lg group-hover/item:text-rose transition-colors duration-300">{item.name}</span>
+                                            <div className="flex-grow border-b border-dotted border-zinc-700/50 mx-1 mb-1" />
+                                            <span className="text-passion font-bold tracking-widest text-sm shrink-0">{item.price}</span>
+                                        </div>
+                                        {"desc" in item && item.desc && (
+                                            <p className="text-xs text-zinc-500 italic font-light tracking-wide leading-relaxed">
+                                                {item.desc}
+                                            </p>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* Footer CTA */}
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-5xl md:text-7xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-16 text-center tracking-tight"
+                    transition={{ delay: 1, duration: 1 }}
+                    className="mt-20 text-center"
                 >
-                    Ο Κατάλογος
-                </motion.h1>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {menuData.map((category, idx) => (
-                        <MenuSection key={category.id} category={category} index={idx} />
-                    ))}
-                </div>
-            </main>
-
-            <footer className="relative z-10 text-center py-10 text-white/20 text-xs border-t border-white/5">
-                <p>Οι τιμές συμπεριλαμβάνουν ΦΠΑ. Το κατάστημα διατηρεί το δικαίωμα αλλαγής τιμών.</p>
-            </footer>
-        </div>
-    );
-}
-
-function MenuSection({ category, index }: { category: MenuCategory; index: number }) {
-    const Icon = category.icon;
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-            className="flex flex-col gap-6"
-        >
-            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/[0.07] transition-colors duration-300 h-full">
-                <div className="flex items-center gap-4 mb-8">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-passion/20 to-passion/5 border border-passion/20 text-passion">
-                        <Icon className="w-6 h-6" />
-                    </div>
-                    <h2 className="text-2xl font-serif font-bold text-white tracking-wide">{category.title}</h2>
-                </div>
-
-                <ul className="space-y-6">
-                    {category.items.map((item, i) => (
-                        <li key={i} className="group">
-                            <div className="flex justify-between items-baseline mb-1">
-                                <h3 className="text-white font-medium text-lg leading-snug group-hover:text-gold transition-colors">{item.name}</h3>
-                                <div className="flex-grow mx-4 border-b border-white/10 border-dashed h-px opacity-30" />
-                                <span className="text-gold font-bold font-mono text-lg whitespace-nowrap">{item.price}</span>
-                            </div>
-                            {item.description && (
-                                <p className="text-white/40 text-sm font-light leading-relaxed">{item.description}</p>
-                            )}
-                        </li>
-                    ))}
-                </ul>
+                    <a
+                        href="https://www.e-food.gr/delivery/korinthos/iguazu-coffee-shop-8104866"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 px-10 py-5 bg-passion text-white rounded-full font-bold uppercase tracking-widest hover:bg-rose transition-all duration-500 shadow-2xl shadow-passion/20 group"
+                    >
+                        <ShoppingBag className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                        <span>Παραγγελία Online</span>
+                    </a>
+                </motion.div>
             </div>
-        </motion.div>
+        </main>
     );
 }
