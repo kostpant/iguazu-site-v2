@@ -1,0 +1,19 @@
+<svg width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:rgb(109, 62, 54);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <g transform="translate(50,50) scale(1.2049748945630268) rotate(48.403361344537814) translate(-50,-50)">
+    <!-- Coffee Bean / Circle Phase -->
+    <circle cx="50" cy="50" r="30" fill="rgb(109, 62, 54)" opacity="0.865546218487395" />
+    
+    <!-- Heart Phase -->
+    <path d="M 50 30 C 50 10 20 10 20 40 Q 20 70 50 90 Q 80 70 80 40 C 80 10 50 10 50 30" fill="rgb(109, 62, 54)" opacity="0.13445378151260504" />
+    
+    <!-- Sparkles -->
+    <circle cx="58.973318995308354" cy="88.98050212873659" r="2" fill="white" opacity="0.4372306002480624" />
+  </g>
+</svg>
