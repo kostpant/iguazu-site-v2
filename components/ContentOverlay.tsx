@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import { clsx } from 'clsx';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Star, Phone, Coffee, Wine, Pizza, CakeSlice, Heart, ExternalLink, MapPin, ShoppingBag } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Star, Phone, Coffee, Wine, Pizza, CakeSlice, Heart, ExternalLink, MapPin, ShoppingBag, Camera } from 'lucide-react';
 
 // Animation Constants
 const LUXURY_EASE = [0.19, 1, 0.22, 1] as const;
@@ -107,82 +107,100 @@ export default function ContentOverlay() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, ease: LUXURY_EASE }}
-                className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-between px-8 md:px-16 py-8 md:py-12 bg-zinc-950 transition-colors duration-500"
+                className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-between px-3 md:px-8 lg:px-16 py-3.5 md:py-6 bg-zinc-950 transition-colors duration-500"
             >
                 <div className="flex flex-col">
-                    <span className="text-xl md:text-2xl font-serif font-bold text-passion tracking-[0.3em] uppercase drop-shadow-md">
+                    <span className="text-[14px] xs:text-base md:text-xl lg:text-2xl font-serif font-bold text-passion tracking-[0.1em] xs:tracking-[0.2em] md:tracking-[0.3em] uppercase drop-shadow-md whitespace-nowrap">
                         Iguazu Loutraki
                     </span>
-                    <span className="text-[10px] md:text-xs text-rose tracking-[0.4em] uppercase font-light mt-1">
+                    <span className="text-[7px] xs:text-[8px] md:text-[10px] lg:text-xs text-rose tracking-[0.2em] xs:tracking-[0.3em] md:tracking-[0.4em] uppercase font-light mt-0.5 md:mt-1 whitespace-nowrap">
                         Valentine's Edition
                     </span>
                 </div>
 
-                <div className="flex gap-4">
+                <div className="flex gap-1.5 xs:gap-2 md:gap-3 lg:gap-4">
                     <a
                         href="https://www.e-food.gr/delivery/korinthos/iguazu-coffee-shop-8104866"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hidden md:flex items-center gap-3 px-8 py-3 bg-passion text-white hover:bg-rose hover:text-charcoal transition-all duration-500 rounded-full font-bold text-[10px] tracking-[0.2em] uppercase shadow-2xl shadow-passion/20"
+                        className="touch-target flex items-center gap-1.5 xs:gap-2 md:gap-3 px-3 xs:px-4 md:px-8 py-2 md:py-4 bg-passion text-white hover:bg-rose hover:text-charcoal transition-all duration-500 rounded-full font-bold text-[8px] xs:text-[9px] md:text-sm tracking-[0.1em] xs:tracking-[0.15em] md:tracking-[0.2em] uppercase shadow-2xl shadow-passion/20"
                     >
-                        <ShoppingBag className="w-3.5 h-3.5 fill-current" />
-                        <span>Παραγγελία</span>
+                        <ShoppingBag className="w-2.5 h-2.5 xs:w-3 xs:h-3 md:w-5 md:h-5 fill-current" />
+                        <span className="hidden sm:inline">Παραγγελία</span>
+                        <span className="sm:hidden">Efood</span>
                     </a>
                     <a
                         href="tel:+302744021012"
-                        className="flex items-center gap-3 px-8 py-3 bg-zinc-900 border border-zinc-700 text-white hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-500 rounded-full font-bold text-[10px] tracking-[0.2em] uppercase shadow-2xl shadow-black"
+                        className="touch-target flex items-center gap-1.5 xs:gap-2 md:gap-3 px-3 xs:px-4 md:px-8 py-2 md:py-4 bg-zinc-900 border border-zinc-700 text-white hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-500 rounded-full font-bold text-[8px] xs:text-[9px] md:text-sm tracking-[0.1em] xs:tracking-[0.15em] md:tracking-[0.2em] uppercase shadow-2xl shadow-black"
                     >
-                        <Phone className="w-3.5 h-3.5 fill-current" />
-                        <span>Καλέστε μας</span>
+                        <Phone className="w-2.5 h-2.5 xs:w-3 xs:h-3 md:w-5 md:h-5 fill-current" />
+                        <span className="hidden sm:inline">Καλέστε μας</span>
                     </a>
                 </div>
             </motion.header>
 
             {/* Hero Section - Centered */}
-            <section className="h-screen sticky top-0 flex flex-col items-center justify-center text-center px-8 z-10 pointer-events-none">
+            <section className="h-screen sticky top-0 flex flex-col items-center justify-center text-center px-4 xs:px-8 z-10">
                 <motion.div
                     style={{ opacity: heroOpacity, y: heroTranslateY }}
                     transition={{ ease: "easeOut" }}
+                    className="pointer-events-none"
                 >
-                    <h1 className="text-6xl md:text-[9.5rem] font-serif text-rose leading-[0.85] tracking-tighter mb-10 drop-shadow-[0_0_15px_rgba(230,57,70,0.5)]">
+                    <h1 className="text-5xl xs:text-6xl md:text-[9.5rem] font-serif text-rose leading-[0.85] tracking-tighter mb-8 md:mb-10 drop-shadow-[0_0_15px_rgba(230,57,70,0.5)]">
                         <span className="block drop-shadow-2xl">Αγάπη &</span>
                         <span className="block italic text-passion mt-2 drop-shadow-2xl">Καφές</span>
                     </h1>
-                    <p className="text-gold font-serif italic text-lg md:text-2xl tracking-[0.6em] uppercase drop-shadow-lg">
+                    <p className="text-gold font-serif italic text-base xs:text-lg md:text-2xl tracking-[0.4em] xs:tracking-[0.6em] uppercase drop-shadow-lg mb-8">
                         Γιορτάστε τον Άγιο Βαλεντίνο στο Iguazu
                     </p>
+                </motion.div>
+
+                {/* Hero CTA Buttons */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.5, ease: LUXURY_EASE, delay: 0.8 }}
+                    className="flex flex-col sm:flex-row gap-3 xs:gap-4 md:gap-6 justify-center items-center pointer-events-auto w-full max-w-[280px] sm:max-w-none px-4 xs:px-0"
+                >
+                    <a
+                        href="https://www.e-food.gr/delivery/korinthos/iguazu-coffee-shop-8104866"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative px-6 xs:px-8 md:px-12 py-3.5 xs:py-4 md:py-4.5 overflow-hidden rounded-full bg-passion text-white shadow-[0_0_30px_rgba(230,57,70,0.4)] hover:shadow-[0_0_50px_rgba(230,57,70,0.6)] transition-all duration-500 w-full sm:w-auto text-center"
+                    >
+                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                        <div className="relative flex items-center justify-center gap-2 xs:gap-3 font-bold text-[10px] xs:text-xs md:text-sm tracking-[0.1em] xs:tracking-[0.2em] uppercase whitespace-nowrap">
+                            <ShoppingBag className="w-3.5 h-3.5 md:w-5 md:h-5" />
+                            <span>Παραγγελία από efood</span>
+                        </div>
+                    </a>
+                    <a
+                        href="/gallery"
+                        className="group relative px-6 xs:px-8 md:px-12 py-3.5 xs:py-4 md:py-4.5 overflow-hidden rounded-full border-2 border-rose text-rose hover:bg-rose hover:text-white transition-all duration-500 w-full sm:w-auto text-center"
+                    >
+                        <div className="relative flex items-center justify-center gap-2 xs:gap-3 font-bold text-[10px] xs:text-xs md:text-sm tracking-[0.1em] xs:tracking-[0.2em] uppercase whitespace-nowrap">
+                            <Camera className="w-3.5 h-3.5 md:w-5 md:h-5" />
+                            <span>Δείτε Φωτογραφίες</span>
+                        </div>
+                    </a>
                 </motion.div>
             </section>
 
             {/* Content Container */}
             <div className="foreground-content w-full">
                 {/* Visual Menu Sections */}
-                <div className="pt-32 pb-10">
-                    <div className="max-w-[1600px] mx-auto px-8 md:px-16">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                <div className="pt-16 md:pt-32 pb-16 md:pb-24">
+                    <div className="max-w-[1600px] mx-auto px-3 xs:px-4 md:px-8 lg:px-16">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 md:gap-6">
                             {CATEGORIES.map((category, idx) => (
-                                <CategoryCard key={category.id} category={category} delay={idx * 0.15} />
+                                <CategoryCard key={category.id} category={category} delay={idx * 0.1} />
                             ))}
-                        </div>
-                        <div className="flex justify-center mt-12">
-                            <a
-                                href="https://www.e-food.gr/delivery/korinthos/iguazu-coffee-shop-8104866"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative px-10 py-4 overflow-hidden rounded-full bg-passion text-white shadow-[0_0_30px_rgba(230,57,70,0.4)] hover:shadow-[0_0_50px_rgba(230,57,70,0.6)] transition-all duration-500"
-                            >
-                                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                                <div className="relative flex items-center gap-3 font-bold text-xs tracking-[0.2em] uppercase">
-                                    <span>Δείτε το μενού στο efood</span>
-                                    <ExternalLink className="w-4 h-4" />
-                                </div>
-                            </a>
                         </div>
                     </div>
 
                     {/* Features Row */}
-                    <div className="max-w-7xl mx-auto px-8 md:px-16 mt-32">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="max-w-7xl mx-auto px-3 xs:px-4 md:px-8 lg:px-16 mt-20 md:mt-32">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
                             <FeatureBox
                                 title="Ρομαντική Ατμόσφαιρα"
                                 desc="Το τέλειο σκηνικό για εσάς και το αγαπημένο σας πρόσωπο."
@@ -205,23 +223,23 @@ export default function ContentOverlay() {
                     </div>
 
                     {/* Google Reviews Section */}
-                    <div className="mt-32">
-                        <div className="text-center mb-20 px-8">
+                    <div className="mt-20 md:mt-32">
+                        <div className="text-center mb-12 md:mb-20 px-4 md:px-8">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                             >
-                                <span className="text-rose text-xs font-bold tracking-[0.8em] uppercase mb-4 block">Κριτικές</span>
-                                <h2 className="text-4xl md:text-6xl font-serif text-white mb-8 italic drop-shadow-lg">Love Notes</h2>
-                                <div className="flex items-center justify-center gap-6">
+                                <span className="text-rose text-[10px] xs:text-xs font-bold tracking-[0.5em] xs:tracking-[0.8em] uppercase mb-4 block">Κριτικές</span>
+                                <h2 className="text-4xl md:text-6xl font-serif text-white mb-6 md:mb-8 italic drop-shadow-lg leading-tight">Love Notes</h2>
+                                <div className="flex flex-col xs:flex-row items-center justify-center gap-4 xs:gap-6">
                                     <div className="flex gap-1">
-                                        {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-5 h-5 text-passion fill-passion" />)}
+                                        {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-4 h-4 xs:w-5 xs:h-5 text-passion fill-passion" />)}
                                     </div>
-                                    <div className="w-[1px] h-8 bg-white/10" />
-                                    <div className="flex flex-col items-start translate-y-1">
+                                    <div className="hidden xs:block w-[1px] h-8 bg-white/10" />
+                                    <div className="flex flex-row xs:flex-col items-center xs:items-start gap-2 xs:gap-0 translate-y-0 xs:translate-y-1">
                                         <span className="text-sm font-bold text-white tracking-widest leading-none">4.8 / 5.0</span>
-                                        <span className="text-[10px] text-rose uppercase tracking-[0.4em] mt-1 font-bold">Google Score</span>
+                                        <span className="text-[9px] xs:text-[10px] text-rose uppercase tracking-[0.2em] xs:tracking-[0.4em] xs:mt-1 font-bold">Google Score</span>
                                     </div>
                                 </div>
                             </motion.div>
@@ -229,18 +247,18 @@ export default function ContentOverlay() {
 
                         <ReviewsMarquee />
 
-                        <div className="flex justify-center mt-20">
+                        <div className="flex justify-center mt-12 md:mt-20 px-4">
                             <a
                                 href="https://www.google.com/search?q=IGUAZU+LOUTRAKI+Reviews#lkt=LocalPoiReviews&rldimm=12429206646981295267"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group relative px-14 py-5 overflow-hidden transition-all duration-700"
+                                className="group relative px-6 xs:px-8 py-2.5 xs:py-3 overflow-hidden transition-all duration-700 w-auto text-center rounded-full"
                             >
-                                <div className="absolute inset-0 border border-rose/30 group-hover:border-passion transition-colors duration-700" />
+                                <div className="absolute inset-0 border border-rose/30 group-hover:border-passion transition-colors duration-700 rounded-full" />
                                 <div className="absolute inset-0 bg-passion translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]" />
-                                <div className="relative flex items-center gap-4 text-rose group-hover:text-white font-bold text-xs tracking-[0.5em] uppercase transition-colors duration-700">
+                                <div className="relative flex items-center justify-center gap-3 text-rose group-hover:text-white font-bold text-[9px] xs:text-[10px] tracking-[0.2em] xs:tracking-[0.3em] uppercase transition-colors duration-700">
                                     <span>Μοιραστείτε την αγάπη</span>
-                                    <ExternalLink className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                                    <ExternalLink className="w-3 xs:w-3.5 h-3 xs:w-3.5 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
                                 </div>
                             </a>
                         </div>
@@ -250,9 +268,6 @@ export default function ContentOverlay() {
                     <LocationSection />
                 </div>
             </div>
-
-            {/* Navigation Bar */}
-            <ActionBar />
         </div>
     );
 }
@@ -271,58 +286,59 @@ function LocationSection() {
     return (
         <section
             id="location"
-            className="location-section mt-40 max-w-7xl mx-auto px-8 md:px-16 pb-48 relative z-30"
+            className="location-section-dark mt-24 md:mt-40 max-w-7xl mx-auto px-3 xs:px-4 md:px-8 lg:px-16 pb-24 md:pb-48 relative z-30"
         >
-            {/* Background Container - White Theme - Solid */}
-            <div className="absolute inset-x-0 -top-20 -bottom-20 bg-white rounded-[3rem] border border-passion/10 -z-10 shadow-[0_0_100px_rgba(230,57,70,0.1)] !opacity-100" />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 lg:gap-20 items-center relative z-10">
+                {/* Text Content - Dark theme */}
+                <div className="text-content p-5 xs:p-8 md:p-10 bg-zinc-950/80 border border-champagne/20 rounded-3xl shadow-2xl shadow-black/50 relative z-20 backdrop-blur-sm">
+                    <span className="text-rose text-[10px] xs:text-sm font-bold tracking-[0.5em] xs:tracking-[0.8em] uppercase mb-4 xs:mb-6 block text-center lg:text-left">Βρείτε μας</span>
+                    <h2 className="text-3xl xs:text-4xl md:text-5xl lg:text-7xl font-serif text-champagne mb-6 md:mb-12 italic text-center lg:text-left drop-shadow-sm leading-tight">Iguazu Λουτράκι</h2>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
-                {/* Text Content - White box */}
-                <div className="content-section-solid-white p-10 bg-white border border-zinc-200 rounded-3xl shadow-xl relative z-20">
-                    <span className="text-rose text-sm font-bold tracking-[0.8em] uppercase mb-6 block text-center lg:text-left !opacity-100">Βρείτε μας</span>
-                    <h2 className="text-5xl md:text-7xl font-serif text-zinc-900 mb-12 italic text-center lg:text-left drop-shadow-none !opacity-100">Iguazu Λουτράκι</h2>
-
-                    <div className="space-y-12 !opacity-100">
-                        <div className="flex flex-col gap-4 text-center lg:text-left items-center lg:items-start group">
-                            <div className="w-10 h-10 flex items-center justify-center bg-passion text-white border border-passion/20 rounded-full group-hover:bg-passion/90 transition-colors shrink-0 !opacity-100 shadow-lg shadow-passion/20">
-                                <MapPin className="w-4 h-4 !opacity-100" />
+                    <div className="space-y-6 xs:space-y-8 md:space-y-12">
+                        <div className="flex flex-col gap-3 xs:gap-4 text-center lg:text-left items-center lg:items-start group">
+                            <div className="w-8 h-8 xs:w-10 xs:h-10 flex items-center justify-center bg-passion text-white border border-passion/20 rounded-full group-hover:bg-passion/90 transition-colors shrink-0 shadow-lg shadow-passion/20">
+                                <MapPin className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
                             </div>
                             <div>
-                                <h4 className="text-[12px] text-zinc-500 uppercase tracking-[0.4em] mb-2 font-bold !opacity-100">Διεύθυνση</h4>
-                                <p className="text-zinc-900 text-base tracking-wide leading-relaxed font-medium !opacity-100">
+                                <h4 className="text-[10px] xs:text-[12px] text-rose uppercase tracking-[0.3em] xs:tracking-[0.4em] mb-1 xs:mb-2 font-bold">Διεύθυνση</h4>
+                                <p className="text-champagne text-sm xs:text-base tracking-wide leading-relaxed font-medium">
                                     Ελευθερίου Βενιζέλου & Π.Ε.Ι.Ν. 36,<br />
                                     Λουτράκι 203 00
                                 </p>
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-4 text-center lg:text-left items-center lg:items-start group">
-                            <div className="w-10 h-10 flex items-center justify-center bg-passion text-white border border-passion/20 rounded-full group-hover:bg-passion/90 transition-colors shrink-0 !opacity-100 shadow-lg shadow-passion/20">
-                                <Phone className="w-4 h-4 !opacity-100" />
+                        <div className="flex flex-col gap-3 xs:gap-4 text-center lg:text-left items-center lg:items-start group">
+                            <div className="w-8 h-8 xs:w-10 xs:h-10 flex items-center justify-center bg-passion text-white border border-passion/20 rounded-full group-hover:bg-passion/90 transition-colors shrink-0 shadow-lg shadow-passion/20">
+                                <Phone className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
                             </div>
                             <div>
-                                <h4 className="text-[12px] text-zinc-500 uppercase tracking-[0.4em] mb-2 font-bold !opacity-100">Τηλέφωνο</h4>
-                                <a href="tel:+302744021012" className="text-zinc-900 hover:text-passion transition-colors text-xl tracking-widest font-serif italic !opacity-100">
+                                <h4 className="text-[10px] xs:text-[12px] text-rose uppercase tracking-[0.3em] xs:tracking-[0.4em] mb-1 xs:mb-2 font-bold">Τηλέφωνο</h4>
+                                <a href="tel:+302744021012" className="text-champagne hover:text-passion transition-colors text-lg xs:text-xl tracking-widest font-serif italic">
                                     2744 021012
                                 </a>
                             </div>
                         </div>
 
-                        <div className="pt-8 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-12 border-t border-zinc-100 !opacity-100">
-                            {hours.map((h, i) => (
-                                <div key={i} className="flex justify-between items-center py-2 border-b border-zinc-100 last:border-0 !opacity-100">
-                                    <span className="text-[12px] uppercase tracking-[0.3em] font-bold text-zinc-400 !opacity-100">{h.day}</span>
-                                    <span className="text-[12px] font-bold text-zinc-900 tracking-widest leading-none !opacity-100">{h.time}</span>
-                                </div>
-                            ))}
+                        {/* Opening Hours - Improved Design */}
+                        <div className="pt-6 md:pt-8 border-t border-champagne/20">
+                            <h4 className="text-[10px] xs:text-[12px] text-rose uppercase tracking-[0.3em] xs:tracking-[0.4em] mb-4 font-bold text-center lg:text-left">Ωράριο Λειτουργίας</h4>
+                            <div className="space-y-1.5 xs:space-y-2">
+                                {hours.map((h, i) => (
+                                    <div key={i} className="flex justify-between items-center py-1.5 xs:py-2 px-2 xs:px-3 rounded-lg hover:bg-champagne/5 transition-colors">
+                                        <span className="text-[11px] xs:text-[12px] md:text-[13px] tracking-wide font-medium text-champagne/80">{h.day}</span>
+                                        <span className="text-[11px] xs:text-[12px] md:text-[13px] font-bold text-champagne tracking-wide">{h.time}</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Map Container - Ensuring 100% opacity */}
-                <div className="content-section-solid-white relative aspect-square md:aspect-video lg:aspect-square w-full brightness-100 transition-all duration-1000 overflow-hidden rounded-[2rem] border-2 border-zinc-200 shadow-2xl z-20 bg-zinc-100">
+                {/* Map Container - Dark theme with pin */}
+                <div className="map-container relative aspect-square md:aspect-video lg:aspect-square w-full transition-all duration-1000 overflow-hidden rounded-[1.5rem] xs:rounded-[2rem] border-2 border-champagne/20 shadow-2xl shadow-black/50 z-20 bg-zinc-950/60 backdrop-blur-sm">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3148.665798934563!2d22.973410776785863!3d37.97321590111166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a046c8273752e5%3A0xac7ef1c070f4cf4f!2sIguazu%20Loutraki!5e0!3m2!1sen!2sgr!4v1707838000000!5m2!1sen!2sgr"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.1305955111466!2d22.974961375892928!3d37.97408147193599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a015c9ebc0dd2d%3A0xac7d6997b93e7ca3!2sIGUAZU%20LOUTRAKI!5e0!3m2!1sel!2sgr!4v1771010575901!5m2!1sel!2sgr"
                         width="100%"
                         height="100%"
                         style={{ border: 0 }}
@@ -344,28 +360,28 @@ function CategoryCard({ category, delay }: { category: any, delay: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: LUXURY_DURATION, ease: LUXURY_EASE, delay }}
-            className="content-section-solid p-10 bg-zinc-950 border border-zinc-800 hover:border-passion/40 transition-all duration-700 group flex flex-col h-full overflow-hidden relative rounded-2xl shadow-2xl"
+            className="content-section-solid p-4 xs:p-5 md:p-6 lg:p-7 bg-zinc-950 border border-zinc-800 hover:border-passion/40 hover:scale-[1.02] transition-all duration-700 group flex flex-col h-full overflow-hidden relative rounded-2xl shadow-2xl cursor-pointer"
         >
-            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-1000">
-                <category.icon className="w-20 h-20 text-passion" />
+            <div className="absolute top-0 right-0 p-3 xs:p-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-1000">
+                <category.icon className="w-10 h-10 xs:w-12 xs:h-12 md:w-16 md:h-16 text-passion" />
             </div>
 
-            <div className="flex items-center gap-4 mb-12 relative z-10">
-                <div className="w-10 h-10 flex items-center justify-center bg-passion/10 border border-passion/20 rounded-md">
-                    <category.icon className="w-4 h-4 text-passion" />
+            <div className="flex items-center gap-2 xs:gap-3 mb-4 xs:mb-5 md:mb-6 relative z-10 border-b border-zinc-800 pb-3 xs:pb-4">
+                <div className="w-7 h-7 xs:w-8 xs:h-8 flex items-center justify-center bg-passion/10 border border-passion/20 rounded-md">
+                    <category.icon className="w-3 xs:w-3.5 h-3 xs:h-3.5 text-passion" />
                 </div>
-                <h3 className="text-[11px] font-serif text-rose uppercase tracking-[0.3em] font-medium">{category.title}</h3>
+                <h3 className="text-[9px] xs:text-[10px] md:text-[11px] font-serif text-rose uppercase tracking-[0.2em] xs:tracking-[0.3em] font-medium whitespace-nowrap">{category.title}</h3>
             </div>
 
-            <ul className="space-y-6 mt-auto relative z-10">
+            <ul className="space-y-1.5 xs:space-y-2 relative z-10">
                 {category.items.map((item: any, i: number) => (
-                    <li key={i} className="flex flex-col group/item border-b border-zinc-800 pb-4 last:border-0 last:pb-0">
-                        <div className="flex justify-between items-baseline mb-1">
-                            <span className="text-white font-serif text-[1rem] group-hover/item:text-rose transition-colors duration-500">{item.name}</span>
-                            <span className="text-passion font-bold text-xs tracking-widest">{item.price}</span>
+                    <li key={i} className="flex flex-col group/item border-b border-zinc-800/50 pb-1.5 xs:pb-2 last:border-0 last:pb-0">
+                        <div className="flex justify-between items-baseline mb-0.5">
+                            <span className="text-white font-serif text-[0.9rem] xs:text-[0.95rem] group-hover/item:text-rose transition-colors duration-500 leading-tight">{item.name}</span>
+                            <span className="text-passion font-bold text-[9px] xs:text-[10px] md:text-xs tracking-widest ml-4">{item.price}</span>
                         </div>
                         {item.desc && (
-                            <p className="text-[10px] text-zinc-400 italic font-light tracking-wide leading-relaxed group-hover/item:text-white transition-colors">
+                            <p className="text-[8px] xs:text-[9px] md:text-[10px] text-zinc-400 italic font-light tracking-wide leading-relaxed group-hover/item:text-white transition-colors">
                                 {item.desc}
                             </p>
                         )}
@@ -383,13 +399,13 @@ function FeatureBox({ title, desc, icon, delay }: { title: string, desc: string,
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay }}
-            className="content-section-solid p-12 border border-zinc-800 bg-zinc-950 hover:border-passion/30 transition-all duration-700 flex flex-col items-center text-center group rounded-2xl shadow-2xl"
+            className="content-section-solid p-5 xs:p-8 md:p-10 lg:p-12 border border-zinc-800 bg-zinc-950 hover:border-passion/30 transition-all duration-700 flex flex-col items-center text-center group rounded-2xl shadow-2xl cursor-pointer"
         >
-            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-passion/5 border border-passion/10 mb-8 group-hover:scale-110 group-hover:bg-passion/10 transition-all duration-700 text-passion">
+            <div className="w-12 h-12 xs:w-16 xs:h-16 flex items-center justify-center rounded-full bg-passion/5 border border-passion/10 mb-5 xs:mb-8 group-hover:scale-110 group-hover:bg-passion/10 transition-all duration-700 text-passion">
                 {icon}
             </div>
-            <h4 className="text-xs font-serif text-rose uppercase tracking-[0.5em] mb-6">{title}</h4>
-            <p className="text-[11px] leading-relaxed text-champagne uppercase tracking-[0.25em] max-w-[280px]">
+            <h4 className="text-[10px] xs:text-xs font-serif text-rose uppercase tracking-[0.3em] xs:tracking-[0.5em] mb-4 xs:mb-6 leading-tight">{title}</h4>
+            <p className="text-[9px] xs:text-[11px] leading-relaxed text-champagne uppercase tracking-[0.1em] xs:tracking-[0.25em] max-w-[280px]">
                 {desc}
             </p>
         </motion.div>
@@ -425,24 +441,24 @@ function ReviewsMarquee() {
     return (
         <div
             ref={scrollRef}
-            className="flex gap-8 overflow-hidden whitespace-nowrap py-10"
+            className="flex gap-4 xs:gap-8 overflow-hidden whitespace-nowrap py-6 xs:py-10"
         >
             {doubledReviews.map((review, i) => (
                 <div
                     key={i}
-                    className="content-section-solid flex-shrink-0 w-[450px] p-12 bg-zinc-950 border border-zinc-800 flex flex-col justify-between group hover:border-passion/30 transition-all duration-700 rounded-2xl shadow-2xl"
+                    className="content-section-solid flex-shrink-0 w-[85vw] xs:w-[320px] md:w-[450px] p-6 xs:p-10 md:p-12 bg-zinc-950 border border-zinc-800 flex flex-col justify-between group hover:border-passion/30 transition-all duration-700 rounded-2xl shadow-2xl"
                 >
-                    <div className="mb-8">
-                        <div className="flex gap-1 mb-6">
+                    <div className="mb-6 xs:mb-8">
+                        <div className="flex gap-1 mb-4 xs:mb-6">
                             {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-3 h-3 text-passion fill-passion" />)}
                         </div>
-                        <p className="text-lg md:text-xl font-serif italic text-white leading-relaxed whitespace-normal line-clamp-4 group-hover:text-rose transition-colors">
+                        <p className="text-base xs:text-lg md:text-xl font-serif italic text-white leading-relaxed whitespace-normal line-clamp-4 group-hover:text-rose transition-colors">
                             &quot;{review.text}&quot;
                         </p>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <div className="w-6 h-[1px] bg-passion opacity-50" />
-                        <span className="text-[9px] font-bold tracking-[0.4em] uppercase text-passion group-hover:text-white transition-colors">{review.author}</span>
+                    <div className="flex items-center gap-3 xs:gap-4">
+                        <div className="w-4 xs:w-6 h-[1px] bg-passion opacity-50" />
+                        <span className="text-[8px] xs:text-[9px] font-bold tracking-[0.3em] xs:tracking-[0.4em] uppercase text-passion group-hover:text-white transition-colors">{review.author}</span>
                     </div>
                 </div>
             ))}
@@ -450,32 +466,3 @@ function ReviewsMarquee() {
     );
 }
 
-function ActionBar() {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 1 }}
-        >
-            <div className="bg-zinc-950 p-2 rounded-full border border-zinc-800 flex gap-2 pointer-events-auto shadow-2xl">
-                <a href="tel:+302744021012" className="h-12 flex items-center px-10 border border-passion/30 text-rose font-bold text-[10px] tracking-[0.4em] uppercase hover:bg-passion hover:text-white transition-all duration-700 rounded-full">
-                    Καλέστε μας
-                </a>
-                <Link
-                    href="/gallery"
-                    className="h-12 flex items-center px-8 border border-passion/30 text-white font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-passion hover:text-white transition-all duration-500 rounded-full"
-                >
-                    Φωτογραφίες
-                </Link>
-                <a
-                    href="https://www.e-food.gr/delivery/korinthos/iguazu-coffee-shop-8104866"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="h-12 flex items-center px-8 bg-passion text-white hover:bg-white hover:text-passion transition-all duration-500 rounded-full font-bold text-[10px] tracking-[0.2em] uppercase shadow-lg shadow-passion/20"
-                >
-                    Παραγγελία
-                </a>
-            </div>
-        </motion.div>
-    );
-}

@@ -99,3 +99,63 @@ body {
 .content-section-solid-white * {
   opacity: 1 !important;
 }
+
+/* Spacing System - 8px base */
+.space-system-1 {
+  margin: 0.5rem;
+}
+
+/* 8px */
+.space-system-2 {
+  margin: 1rem;
+}
+
+/* 16px */
+.space-system-3 {
+  margin: 1.5rem;
+}
+
+/* 24px */
+.space-system-4 {
+  margin: 2rem;
+}
+
+/* 32px */
+.space-system-6 {
+  margin: 3rem;
+}
+
+/* 48px */
+.space-system-8 {
+  margin: 4rem;
+}
+
+/* 64px */
+
+/* Mobile Touch Targets */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Prevent horizontal scroll */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Location Section Dark Theme */
+.location-section-dark {
+  background: transparent !important;
+}
+
+.location-section-dark .map-container {
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid rgba(247, 231, 206, 0.2);
+}
+
+.location-section-dark .text-content {
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid rgba(247, 231, 206, 0.1);
+}
