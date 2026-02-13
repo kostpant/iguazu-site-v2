@@ -21,7 +21,12 @@ export default function CoffeeCanvas() {
         restDelta: 0.0001
     });
 
-    const currentFrame = useTransform(smoothProgress, [0, 0.4], [0, FRAME_COUNT - 1], { clamp: true });
+    const currentFrame = useTransform(
+        smoothProgress,
+        [0, 0.4, 1.0],
+        [0, (FRAME_COUNT - 1) * 0.85, FRAME_COUNT - 1],
+        { clamp: true }
+    );
 
     useEffect(() => {
         const loadImages = async () => {
