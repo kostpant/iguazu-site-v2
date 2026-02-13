@@ -223,20 +223,26 @@ export default function ContentOverlay() {
                         </Link>
                     </motion.div>
 
-                    <motion.a
+                    <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.2, ease: LUXURY_EASE, delay: 1.4 }}
-                        whileHover={{ scale: 1.02, backgroundColor: 'rgba(230,57,70,1)', color: '#fff' }}
-                        whileTap={{ scale: 0.98 }}
-                        href="/gallery"
-                        className="group relative px-6 xs:px-8 md:px-12 py-3.5 xs:py-4 md:py-4.5 overflow-hidden rounded-full border-2 border-rose text-rose transition-all duration-500 w-full sm:w-auto text-center"
+                        className="w-full sm:w-auto"
                     >
-                        <div className="relative flex items-center justify-center gap-2 xs:gap-3 font-bold text-[10px] xs:text-xs md:text-sm tracking-[0.1em] xs:tracking-[0.2em] uppercase whitespace-nowrap">
-                            <Camera className="w-3.5 h-3.5 md:w-5 md:h-5" />
-                            <span>Gallery</span>
-                        </div>
-                    </motion.a>
+                        <Link
+                            href="/gallery"
+                            className="group relative px-6 xs:px-8 md:px-12 py-3.5 xs:py-4 md:py-4.5 overflow-hidden rounded-full bg-zinc-950 text-rose shadow-[0_0_30px_rgba(230,57,70,0.2)] hover:shadow-[0_0_50px_rgba(230,57,70,0.4)] transition-all duration-500 block w-full text-center"
+                        >
+                            <motion.div
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="relative flex items-center justify-center gap-2 xs:gap-3 font-bold text-[10px] xs:text-xs md:text-sm tracking-[0.1em] xs:tracking-[0.2em] uppercase whitespace-nowrap"
+                            >
+                                <Camera className="w-3.5 h-3.5 md:w-5 md:h-5" />
+                                <span>Gallery</span>
+                            </motion.div>
+                        </Link>
+                    </motion.div>
                 </div>
             </section>
 
