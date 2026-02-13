@@ -250,7 +250,7 @@ export default function ContentOverlay() {
 
                     <div className="flex justify-center mt-12 md:mt-20 px-4">
                         <a
-                            href="https://www.google.com/search?q=IGUAZU+LOUTRAKI+Reviews#lkt=LocalPoiReviews&rldimm=12429206646981295267"
+                            href="https://www.google.com/search?sca_esv=33887d7ce87e6d2b&sxsrf=ANbL-n6fBDE3nWNaWN5EJa4IAEylkxsx8A:1771013033800&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOToxzwX5KE4Rr0KD9vPz5vrY-08jSrdYDfh0Nkt6Pu9SxwpNoaiN9OYGOE9bh645E-T-VvY9w3g-3v5HTjUGzDicVQZO&q=IGUAZU+LOUTRAKI+Reviews&sa=X&ved=2ahUKEwj1t5bWodeSAxXCOHoKHQipEfkQ0bkNegQIPRAF&biw=2133&bih=1032&dpr=0.9"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group relative px-6 xs:px-8 py-2.5 xs:py-3 overflow-hidden transition-all duration-700 w-auto text-center rounded-full"
