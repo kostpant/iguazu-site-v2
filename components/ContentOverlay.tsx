@@ -326,13 +326,13 @@ export default function ContentOverlay() {
 
 function LocationSection() {
     const hours = [
-        { day: "Δευτέρα", time: "6 ΠΜ – 10 MM" },
-        { day: "Τρίτη", time: "6 ΠΜ – 10 MM" },
-        { day: "Τετάρτη", time: "6 ΠΜ – 10 MM" },
-        { day: "Πέμπτη", time: "6 ΠΜ – 1 MM" },
-        { day: "Παρασκευή", time: "6 ΠΜ – 10 MM" },
-        { day: "Σάββατο", time: "6 ΠΜ – 10 MM" },
-        { day: "Κυριακή", time: "6 ΠΜ – 10 MM" },
+        { day: "Monday", time: "6 AM – 10 PM" },
+        { day: "Tuesday", time: "6 AM – 10 PM" },
+        { day: "Wednesday", time: "6 AM – 10 PM" },
+        { day: "Thursday", time: "6 AM – 10 PM" },
+        { day: "Friday", time: "6 AM – 10 PM" },
+        { day: "Saturday", time: "6 AM – 10 PM" },
+        { day: "Sunday", time: "6 AM – 10 PM" },
     ];
 
     return (
@@ -343,8 +343,8 @@ function LocationSection() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 lg:gap-20 items-center relative z-10">
                 {/* Text Content - Dark theme */}
                 <div className="text-content p-5 xs:p-8 md:p-10 bg-zinc-950/80 border border-champagne/20 rounded-3xl shadow-2xl shadow-black/50 relative z-20 backdrop-blur-sm">
-                    <span className="text-rose text-[10px] xs:text-sm font-bold tracking-[0.5em] xs:tracking-[0.8em] uppercase mb-4 xs:mb-6 block text-center lg:text-left">Βρείτε μας</span>
-                    <h2 className="text-3xl xs:text-4xl md:text-5xl lg:text-7xl font-serif text-champagne mb-6 md:mb-12 italic text-center lg:text-left drop-shadow-sm leading-tight">Iguazu Λουτράκι</h2>
+                    <span className="text-rose text-[10px] xs:text-sm font-bold tracking-[0.5em] xs:tracking-[0.8em] uppercase mb-4 xs:mb-6 block text-center lg:text-left">Find us</span>
+                    <h2 className="text-3xl xs:text-4xl md:text-5xl lg:text-7xl font-serif text-champagne mb-6 md:mb-12 italic text-center lg:text-left drop-shadow-sm leading-tight">Iguazu Loutraki</h2>
 
                     <div className="space-y-6 xs:space-y-8 md:space-y-12">
                         <div className="flex flex-col gap-3 xs:gap-4 text-center lg:text-left items-center lg:items-start group">
@@ -352,10 +352,10 @@ function LocationSection() {
                                 <MapPin className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
                             </div>
                             <div>
-                                <h4 className="text-[10px] xs:text-[12px] text-rose uppercase tracking-[0.3em] xs:tracking-[0.4em] mb-1 xs:mb-2 font-bold">Διεύθυνση</h4>
+                                <h4 className="text-[10px] xs:text-[12px] text-rose uppercase tracking-[0.3em] xs:tracking-[0.4em] mb-1 xs:mb-2 font-bold">Address</h4>
                                 <p className="text-champagne text-sm xs:text-base tracking-wide leading-relaxed font-medium">
-                                    Ελευθερίου Βενιζέλου & Π.Ε.Ι.Ν. 36,<br />
-                                    Λουτράκι 203 00
+                                    Eleftheriou Venizelou & P.E.I.N. 36,<br />
+                                    Loutraki 203 00
                                 </p>
                             </div>
                         </div>
@@ -365,7 +365,7 @@ function LocationSection() {
                                 <Phone className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
                             </div>
                             <div>
-                                <h4 className="text-[10px] xs:text-[12px] text-rose uppercase tracking-[0.3em] xs:tracking-[0.4em] mb-1 xs:mb-2 font-bold">Τηλέφωνο</h4>
+                                <h4 className="text-[10px] xs:text-[12px] text-rose uppercase tracking-[0.3em] xs:tracking-[0.4em] mb-1 xs:mb-2 font-bold">Phone</h4>
                                 <a href="tel:+302744021012" className="text-champagne hover:text-passion transition-colors text-lg xs:text-xl tracking-widest font-serif italic">
                                     2744 021012
                                 </a>
@@ -374,7 +374,7 @@ function LocationSection() {
 
                         {/* Opening Hours - Improved Design */}
                         <div className="pt-6 md:pt-8 border-t border-champagne/20">
-                            <h4 className="text-[10px] xs:text-[12px] text-rose uppercase tracking-[0.3em] xs:tracking-[0.4em] mb-4 font-bold text-center lg:text-left">Ωράριο Λειτουργίας</h4>
+                            <h4 className="text-[10px] xs:text-[12px] text-rose uppercase tracking-[0.3em] xs:tracking-[0.4em] mb-4 font-bold text-center lg:text-left">Opening Hours</h4>
                             <div className="space-y-1.5 xs:space-y-2">
                                 {hours.map((h, i) => (
                                     <div key={i} className="flex justify-between items-center py-1.5 xs:py-2 px-2 xs:px-3 rounded-lg hover:bg-champagne/5 transition-colors">
