@@ -231,8 +231,9 @@ export default function ContentOverlay() {
                     >
                         <Link
                             href="/gallery"
-                            className="group relative px-6 xs:px-8 md:px-12 py-3.5 xs:py-4 md:py-4.5 overflow-hidden rounded-full bg-zinc-950 text-rose shadow-[0_0_30px_rgba(230,57,70,0.2)] hover:shadow-[0_0_50px_rgba(230,57,70,0.4)] transition-all duration-500 block w-full text-center"
+                            className="group relative px-6 xs:px-8 md:px-12 py-3.5 xs:py-4 md:py-4.5 overflow-hidden rounded-full bg-passion text-white shadow-[0_0_30px_rgba(230,57,70,0.4)] hover:shadow-[0_0_50px_rgba(230,57,70,0.6)] transition-all duration-500 block w-full text-center"
                         >
+                            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
