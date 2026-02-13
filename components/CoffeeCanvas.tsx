@@ -66,7 +66,14 @@ export default function CoffeeCanvas() {
             if (image) {
                 const hRatio = canvas.width / image.width;
                 const vRatio = canvas.height / image.height;
-                const ratio = Math.max(hRatio, vRatio);
+
+                // Optimized scaling for responsive luxury feel
+                // On mobile portrait, we avoid pure 'object-cover' which crops too much horizontal detail
+                // Instead, we use a hybrid ratio that favors width visibility for background decorations
+                let ratio = Math.max(hRatio, vRatio);
+                if (canvas.height > canvas.width) {
+                    ratio = Math.max(hRatio, vRatio * 0.72); // Zooms out slightly on mobile to show decorative text
+                }
 
                 const centerShift_x = (canvas.width - image.width * ratio) / 2;
                 const centerShift_y = (canvas.height - image.height * ratio) / 2;
