@@ -6,9 +6,9 @@ const API_KEY = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 async function fixBug() {
-    const payloadStr = process.argv[2];
+    const payloadStr = process.env.CLIENT_PAYLOAD;
     if (!payloadStr) {
-        console.error("No payload provided");
+        console.error("No payload provided in CLIENT_PAYLOAD env variable");
         process.exit(1);
     }
 
